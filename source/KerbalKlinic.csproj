@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="17.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -26,7 +26,6 @@
     <ConsolePause>false</ConsolePause>
     <Prefer32Bit>false</Prefer32Bit>
     <PlatformTarget>anycpu</PlatformTarget>
-    <DocumentationFile>..\docs\Code\Code.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>embedded</DebugType>
@@ -41,40 +40,34 @@
     <DocumentationFile>..\docs\Code\Code.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="K:\112\KSP_x64_Data\Managed\Assembly-CSharp.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="K:\112\KSP_x64_Data\Managed\Assembly-CSharp-firstpass.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="K:\112\KSP_x64_Data\Managed\UnityEngine.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="K:\112\KSP_x64_Data\Managed\UnityEngine.AudioModule.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="K:\112\KSP_x64_Data\Managed\UnityEngine.IMGUIModule.dll">
-      <Private>False</Private>
-    </Reference>
     <Reference Include="K:\112\KSP_x64_Data\Managed\UnityEngine.UI*.dll">
       <Private>False</Private>
     </Reference>
-    <Reference Include="K:\112\KSP_x64_Data\Managed\UnityEngine.CoreModule.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="K:\112\KSP_x64_Data\Managed\UnityEngine.AnimationModule.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="K:\112\KSP_x64_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll">
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\LIB\managed\1.8.0\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\..\LIB\managed\1.8.0\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\..\LIB\managed\1.8.0\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>..\..\..\..\..\LIB\managed\1.8.0\UnityEngine.AnimationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\..\..\..\..\LIB\managed\1.8.0\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\..\..\..\..\LIB\managed\1.8.0\UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="KerbalKlinic.cs" />
@@ -106,33 +99,19 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v17.0\TextTemplating\Microsoft.TextTemplating.targets" />
   <PropertyGroup>
-    <PreBuildEvent>"$(DevEnvDir)\TextTransform.exe" "$(ProjectDir)Properties\Version.tt" 
+    <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>
-IF "%25K112%25"=="" (
-	ECHO Configuration error - K112 not specified in project.
-	ECHO Either set K112 environment variable
-	PAUSE
-	GOTO DONE
-)
-
-start /D $(ProjectDir)..\ /WAIT _deploy.bat  $(TargetDir) $(TargetFileName) $(TargetName)
-if $(ConfigurationName) == Release (	
-  start /D $(ProjectDir)..\ /WAIT _buildRelease.bat $(TargetDir) $(TargetFileName) $(TargetName)
-
-del $(TargetDir)\*.tmp
-)
 </PostBuildEvent>
   </PropertyGroup>
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
         <Policies>
-          <TextStylePolicy TabWidth="4" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" FileWidth="132" TabsToSpaces="False" scope="text/plain" />
+          <TextStylePolicy TabWidth="4" TabsToSpaces="False" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" FileWidth="132" scope="text/plain" />
         </Policies>
       </Properties>
     </MonoDevelop>
